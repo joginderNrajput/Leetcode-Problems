@@ -6,20 +6,27 @@ using namespace std;
 
  // } Driver Code Ends
 //User function Template for C++
-
+#include<queue>
 class Solution{
 public:
-    int kthLargest(vector<int> &Arr,int N,int k){
-         vector<int>sumStore;
-    for(int i=0; i<Arr.size(); i++){
-        int sum = 0;
-        for(int j=i; j<Arr.size(); j++){
-            sum = sum + Arr[j];
-            sumStore.push_back(sum);
+    int kthLargest(vector<int> &arr,int N,int K){
+        
+        priority_queue <int, vector<int>, greater<int> > mini;
+        for(int i=0; i<arr.size(); i++){
+            int sum = 0;
+            for(int j=i; j<arr.size();j++){
+                sum = sum+arr[j];
+                if(mini.size() < K){
+                    mini.push(sum);
+                }else{
+                    if(sum > mini.top()){
+                        mini.pop();
+                        mini.push(sum);
+                    }
+                }
+            }
         }
-    }
-    sort(sumStore.begin(), sumStore.end());
-    return sumStore[sumStore.size()-k];
+        return mini.top();
     }
 };
 
