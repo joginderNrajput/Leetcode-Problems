@@ -7,8 +7,7 @@ using namespace std;
  // } Driver Code Ends
 // you are required to complete this function 
 // function should print the required range
-#include<limits.h>
-#include<queue>
+
 class node{
     public:
     int data;
@@ -61,8 +60,8 @@ class Solution{
         }
     }
     pair<int, int> ans;
-    ans = make_pair(end, start);
-    return {start, end};
+    ans = make_pair(start, end);
+    return ans;
     }
 };
 
