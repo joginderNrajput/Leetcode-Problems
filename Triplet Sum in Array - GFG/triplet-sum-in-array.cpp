@@ -8,20 +8,23 @@ class Solution{
     public:
     //Function to find if there exists a triplet in the 
     //array A[] which sums up to X.
-    bool find3Numbers(int A[], int n, int X)
+    bool find3Numbers(int arr[], int n, int X)
     {
-       for(int i=0; i<n-2; i++){
-           unordered_set<int> s;
-           int curr = X-A[i];
-           for(int j = i+1; j<n; j++){
-               if(s.find(curr - A[j]) != s.end()){
-                   return 1;
-               }else{
-                   s.insert(A[j]);
-               }
-           }
-       }
-       return 0;
+        for(int i=0; i<n-2; i++){
+            sort(arr, arr+n);
+            int l = i+1;
+            int r = n-1;
+            while(l<r){
+                if(arr[i]+ arr[l] + arr[r] == X){
+                    return 1;
+                }else if(arr[i]+ arr[l] + arr[r] < X){
+                    l++;
+                }else{
+                    r--;
+                }
+            }
+        }
+        return 0;
     }
 
 };
