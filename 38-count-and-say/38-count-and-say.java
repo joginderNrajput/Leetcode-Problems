@@ -3,15 +3,17 @@ class Solution {
         if(n == 1)
             return "1";
         String s=countAndSay(n-1);
-        String res = "";
+        StringBuilder res = new StringBuilder();
+        // String res = "";
         int counter = 0;
         for(int i=0; i<s.length(); i++){
             counter++;
             if(i == s.length()-1 || s.charAt(i) != s.charAt(i+1)){
-                res = res+counter+s.charAt(i);
+                // res = res+counter+s.charAt(i);
+                res.append(counter).append(s.charAt(i));
                 counter = 0;
             }
         }
-        return res;
+        return res.toString();
     }
 }
