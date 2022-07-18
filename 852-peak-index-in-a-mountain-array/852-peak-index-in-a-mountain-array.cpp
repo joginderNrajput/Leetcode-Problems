@@ -1,17 +1,12 @@
 class Solution {
 public:
     int peakIndexInMountainArray(vector<int>& arr) {
-        int s = 0; 
-        int e = arr.size()-1;
-        // int mid = s + (e-s)/2;
-        while(s<e){
-             int mid = s + (e-s)/2;
-            if(arr[mid] < arr[mid+1]){
-                s = mid+1;
-            }else{
-                e = mid;
+       int ans = 0;
+        for(int i=1; i<arr.size(); i++){
+            if(arr[i] > arr[i-1]){
+                ans = i;
             }
         }
-        return s;
+        return ans;
     }
 };
