@@ -16,7 +16,7 @@ class Solution{
                 max = arr[i];
             }
         }
-        unordered_map<int, int>map(n);
+        unordered_map<int, int>map(max+1);
         for(int i=0; i<n; i++){
             map[arr[i]]++;
         }
