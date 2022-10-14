@@ -10,13 +10,8 @@ class Solution{
     public:
     int maximizeSum(int arr[], int n) 
     {
-        int max = arr[0];
-        for(int i=0; i<n; i++){
-            if(max < arr[i]){
-                max = arr[i];
-            }
-        }
-        unordered_map<int, int>map(max+1);
+        
+        unordered_map<int, int>map(n);
         for(int i=0; i<n; i++){
             map[arr[i]]++;
         }
