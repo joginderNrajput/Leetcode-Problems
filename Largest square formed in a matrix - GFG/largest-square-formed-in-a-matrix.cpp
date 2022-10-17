@@ -9,30 +9,32 @@ using namespace std;
 
 class Solution{
 public:
-    int solve(vector<vector<int>>& mat, int i, int j, int &maxi, vector<vector<int>> &dp){
-        if(i >= mat.size() || j >= mat[0].size()){
-            return 0;
+    int solve(vector<vector<int>>& mat, int i, int j, int &maxi){
+        int row = mat.size();
+        int col = mat[0].size();
+        vector<vector<int>> dp(row+1, vector<int>(col+1, 0));
+        for(int i=row-1; i>=0; i--){
+            for(int j=col-1; j>=0; j--){
+                int right = dp[i][j+1];
+                int dioganal = dp[i+1][j+1];
+                int down = dp[i+1][j];
+                
+                if(mat[i][j] == 1){
+                    dp[i][j] =1+ min(right, min(dioganal, down));
+                    maxi = max(dp[i][j], maxi);
+                   
+                }else{
+                   dp[i][j] = 0;
+                }
+            }
         }
-        if(dp[i][j] != -1){
-            return dp[i][j];
-        }
-        int right = solve(mat, i, j+1, maxi, dp);
-        int dioganal = solve(mat, i+1, j+1, maxi, dp);
-        int down = solve(mat, i+1, j, maxi, dp);
-        
-        if(mat[i][j] == 1){
-            dp[i][j] =1+ min(right, min(dioganal, down));
-            maxi = max(dp[i][j], maxi);
-            return dp[i][j];
-        }else{
-            return dp[i][j] = 0;
-        }
+        return dp[0][0];
         
     }
     int maxSquare(int n, int m, vector<vector<int>> mat){
-        vector<vector<int>> dp(n, vector<int>(m, -1));
+       
         int maxi = 0;
-        solve(mat, 0, 0, maxi, dp);
+        solve(mat, 0, 0, maxi);
         return maxi;
     }
 };
