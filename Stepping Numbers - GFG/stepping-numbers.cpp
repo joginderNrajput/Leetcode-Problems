@@ -37,10 +37,8 @@ public:
         
         sort(ans.begin(), ans.end());
         int count = 0;
-        for(int i=0; i<ans.size(); i++){
-            // cout<< ans[i] << " ";
-            count++;
-        }return count;
+        
+        return ans.size();
     }
 };
 
