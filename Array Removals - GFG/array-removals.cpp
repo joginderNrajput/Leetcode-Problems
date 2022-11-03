@@ -10,7 +10,16 @@ using namespace std;
 
 class Solution{
     public:
-    int solve(int i, int j, vector<int>& arr, int k, vector<vector<int>> &dp){
+    int solve(int i, int j, vector<int> &arr, int k){
+        if(i >= j)
+        return 0;
+        
+        if(arr[j] - arr[i] <= k)
+        return 0;
+        
+        return 1+min(solve(i+1, j, arr, k), solve(i, j-1, arr, k));
+    }
+    int solveMem(int i, int j, vector<int>& arr, int k, vector<vector<int>> &dp){
         if(i >= j){
             return 0;
         }
@@ -20,14 +29,15 @@ class Solution{
         if(dp[i][j]  != -1){
             return dp[i][j];
         }
-        dp[i][j] = 1+min(solve(i+1, j, arr, k, dp), solve(i, j-1, arr, k, dp));
+        dp[i][j] = 1+min(solveMem(i+1, j, arr, k, dp), solveMem(i, j-1, arr, k,dp));
         return dp[i][j];
     }
     int removals(vector<int>& arr, int k){
         int n = arr.size();
         sort(arr.begin(), arr.end());
         vector<vector<int>>dp (100, vector<int>(100, -1));
-        return solve(0, n-1, arr, k, dp);
+        return solveMem(0, n-1, arr, k,dp);
+        // return solve(0, n-1, arr, k);
     }
 };
 
