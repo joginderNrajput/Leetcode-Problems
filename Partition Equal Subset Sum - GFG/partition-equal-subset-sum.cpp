@@ -45,6 +45,23 @@ public:
         
         return dp[index][target] = incl or excl;
     }
+    
+    int solveTab(int index, int N, vector<int> &arr, int total){
+        vector<vector<int>> dp(N, vector<int>(total+1, 0));
+        for(int i=0; i<N; i++){
+            dp[i][0] = 1;
+        }
+        
+        for(int index = N; index >= 0; index--){
+            for(int target = 0; target <= total/2; target++){
+                bool incl = dp[index+1][target-arr[index]];
+                bool excl = dp[index+1][target];
+                
+                dp[index][target] = incl or excl;
+            }
+        }
+        return dp[0][total/2];
+    }
     int equalPartition(int N, int arr[])
     {
         int total = 0;
