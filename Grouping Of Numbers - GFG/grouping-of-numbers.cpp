@@ -10,23 +10,28 @@ using namespace std;
 class Solution {
   public:
     int maxGroupSize(int arr[], int N, int K) {
-        int a[K] = {0};
+        vector<int> temp(K, 0);
+        
         for(int i=0; i<N; i++){
-            a[arr[i]%K]++;
+            int rem = arr[i]%K;
+            temp[rem]++;
         }
+        
         int ans = 0;
         
-        for(int i=1; i<=K/2; i++){
-            if(i != K-i){
-                ans = ans+max(a[i], a[K-i]);
-            }else{
-                if(a[i] != 0){
-                    ans++;
-                }
-            }
+        int i=1;
+        int j=K-1;
+        while(i<j){
+            ans = ans+max(temp[i], temp[j]);
+            i++;
+            j--;
         }
-        if(a[0] > 0){
+        
+        if(i==j && temp[i] != 0){
             ans++;
+        }
+        if(temp[0] > 0){
+            ans ++;
         }
         return ans;
     }
