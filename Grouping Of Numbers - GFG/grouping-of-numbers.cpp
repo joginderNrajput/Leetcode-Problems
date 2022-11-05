@@ -31,7 +31,7 @@ class Solution {
             ans++;
         }
         if(temp[0] > 0){
-            ans ++;
+            ans++;
         }
         return ans;
     }
