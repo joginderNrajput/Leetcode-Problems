@@ -16,24 +16,9 @@ public:
         return true;
     }
     string isSumOfTwo(int N){
-        vector<int>v;
-        for(int i=1; i<N; i++){
-            if(isPrime(i)){
-                v.push_back(i);
-            }
-        }
-        
-        int i=0;
-        int j=v.size()-1;
-        sort(v.begin(), v.end());
-        
-        while(i<j){
-            if(v[i] + v[j] == N){
+        for(int i=2; i<N-1; i++){
+            if(isPrime(i) && isPrime(N-i)){
                 return "Yes";
-            }else if(v[i] + v[j] < N){
-                i++;
-            }else if(v[i] + v[j] > N){
-                j--;
             }
         }
         return "No";
